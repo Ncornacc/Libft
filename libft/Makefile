@@ -6,7 +6,7 @@
 #    By: ncornacc <marvin@codam.nl>                   +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/10/11 11:34:37 by ncornacc      #+#    #+#                  #
-#    Updated: 2022/10/13 17:51:35 by ncornacc      ########   odam.nl          #
+#    Updated: 2022/10/20 20:42:34 by ncornacc      ########   odam.nl          #
 #                                                                              #
 #******************************************************************************#
 
@@ -56,6 +56,18 @@ SRCSB	:=	ft_lstnew_bonus.c \
 			ft_lstmap_bonus.c	\
 			$(SRCS)
 
+BONUS	:=	ft_lstnew_bonus.o \
+            ft_lstadd_front_bonus.o \
+            ft_lstsize_bonus.o  \
+            ft_lstlast_bonus.o  \
+            ft_lstadd_back_bonus.o  \
+            ft_lstdelone_bonus.o    \
+            ft_lstclear_bonus.o \
+            ft_lstiter_bonus.o  \
+            ft_lstmap_bonus.o   
+
+NAMEB	:=	libft.a
+
 OBJSB	:=	${SRCSB:.c=.o}
 
 RM		:=	rm	-f
@@ -78,11 +90,13 @@ all:	${NAME}
 %.o: 	%.c
 	${CC} ${FLAG} -c $^
 
-bonus:	${OBJSB}
+${NAMEB}:  ${OBJSB}
 	${AR} -rc ${NAME} ${OBJSB}
 
+bonus:	${NAMEB}
+
 clean:
-	${RM} ${OBJS} ${OBJS}
+	${RM} ${BONUS} ${OBJS}
 
 fclean:		clean
 	${RM} ${NAME}
