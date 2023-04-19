@@ -6,13 +6,13 @@
 /*   By: ncornacc <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/08 12:20:59 by ncornacc      #+#    #+#                 */
-/*   Updated: 2022/10/13 17:53:45 by ncornacc      ########   odam.nl         */
+/*   Updated: 2023/04/19 14:47:40 by ncornacc      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin(char *s1, char const *s2)
 {
 	int		total_len;
 	int		len1;
