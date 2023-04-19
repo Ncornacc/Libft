@@ -6,101 +6,71 @@
 #    By: ncornacc <marvin@codam.nl>                   +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/10/11 11:34:37 by ncornacc      #+#    #+#                  #
-#    Updated: 2022/10/20 20:42:34 by ncornacc      ########   odam.nl          #
+#    Updated: 2023/02/03 14:15:40 by ncornacc      ########   odam.nl          #
 #                                                                              #
 #******************************************************************************#
 
-SRCS	:=	ft_bzero.c	\
-		ft_memcpy.c		\
-		ft_memmove.c 	\
-		ft_memchr.c		\
-		ft_memcmp.c		\
-		ft_memset.c		\
-		ft_strlen.c		\
-		ft_isalpha.c 	\
-		ft_isdigit.c		\
-		ft_isalnum.c		\
-		ft_isascii.c		\
-		ft_isprint.c		\
-		ft_toupper.c		\
-		ft_tolower.c		\
-		ft_strchr.c		\
-		ft_strrchr.c		\
-		ft_strncmp.c		\
-		ft_strlcpy.c		\
-		ft_strlcat.c		\
-		ft_strnstr.c		\
-		ft_atoi.c		\
-		ft_calloc.c		\
-		ft_strdup.c		\
-		ft_substr.c		\
-		ft_strjoin.c 	\
-		ft_strtrim.c		\
-		ft_split.c		\
-		ft_itoa.c		\
-		ft_strmapi.c		\
-		ft_striteri.c	\
-		ft_putchar_fd.c	\
-		ft_putstr_fd.c	\
-		ft_putendl_fd.c	\
-		ft_putnbr_fd.c
-
-SRCSB	:=	ft_lstnew_bonus.c \
-			ft_lstadd_front_bonus.c \
-			ft_lstsize_bonus.c	\
-			ft_lstlast_bonus.c	\
-			ft_lstadd_back_bonus.c	\
-			ft_lstdelone_bonus.c	\
-			ft_lstclear_bonus.c	\
-			ft_lstiter_bonus.c	\
-			ft_lstmap_bonus.c	\
-			$(SRCS)
-
-BONUS	:=	ft_lstnew_bonus.o \
-            ft_lstadd_front_bonus.o \
-            ft_lstsize_bonus.o  \
-            ft_lstlast_bonus.o  \
-            ft_lstadd_back_bonus.o  \
-            ft_lstdelone_bonus.o    \
-            ft_lstclear_bonus.o \
-            ft_lstiter_bonus.o  \
-            ft_lstmap_bonus.o   
-
-NAMEB	:=	libft.a
-
-OBJSB	:=	${SRCSB:.c=.o}
-
-RM		:=	rm	-f
+#############################VARIABLES################################
 
 NAME	:=	libft.a
 
-FLAG	:=	-Wall -Werror -Wextra
+INCLUDE	:=	-I./include/
+
+ARR		:=	ar -rc
 
 CC		:=	gcc
 
-OBJS	:=	${SRCS:.c=.o}
+FLAGS	:=	-Wall -Werror -Wextra 
 
-AR		:=	ar
+RM		:=	rm	-rf
 
-${NAME}:	${OBJS}
-	${AR} -rc $@	$^
+##############################################################
+#############################SOURCES##########################
+
+OBJ_DIR	:=	obj/
+SRC_DIR	:=	src/
+
+SRC		:=	$(wildcard ${SRC_DIR}/*.c)
+OBJ		:=	${addprefix ${OBJ_DIR}, ${notdir ${SRC:.c=.o}}}
+
+
+##############################################################
+#############################COLORS###########################
+
+DEF_COLOR = \033[0;39m
+GRAY = \033[0;90m
+RED = \033[0;91m
+GREEN = \033[0;92m
+YELLOW = \033[0;93m
+BLUE = \033[0;94m
+MAGENTA = \033[0;95m
+CYAN = \033[0;96m
+
+##############################################################
+#############################RULES############################
 
 all:	${NAME}
 
-%.o: 	%.c
-	${CC} ${FLAG} -c $^
+${NAME}: ${OBJ_DIR} ${OBJ}
+	@${ARR} ${NAME}	${OBJ}
+	@echo "${GREEN} libft.a compiled!${DEF_COLOR}"
 
-${NAMEB}:  ${OBJSB}
-	${AR} -rc ${NAME} ${OBJSB}
+${OBJ_DIR}%.o: ${SRC_DIR}%.c
+	@echo	"${YELLOW} Compiling: $^ ${DEF_COLOR}"
+	@${CC} ${FLAG} ${INCLUDE} -c $^ -o $@
 
-bonus:	${NAMEB}
+${OBJ_DIR}:
+	mkdir -p ${OBJ_DIR}
 
 clean:
-	${RM} ${BONUS} ${OBJS}
+	${RM} ${OBJ_DIR}
+	@echo "${MAGENTA} Object files cleaned!${DEF_COLOR}"
 
 fclean:		clean
 	${RM} ${NAME}
+	@echo  "${MAGENTA} executable/archive files cleaned!${DEF_COLOR}"
 
 re:		fclean all
+		@echo	"${GREEN} Cleaned and rebuild everything for ft_print!${DEF_COLOR}:"
 
 .PHONY:		all clean fclean re
