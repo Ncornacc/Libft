@@ -9,7 +9,7 @@
 /*   Updated: 2022/10/17 14:12:33 by ncornacc      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
-#include "ft_printf.h"
+#include "libft.h"
 
 void	print_num(va_list args, int *len)
 {

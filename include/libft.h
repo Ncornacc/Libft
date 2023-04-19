@@ -14,6 +14,7 @@
 # define LIBFT_H
 # include <stdlib.h>
 # include <unistd.h>
+# include <stdarg.h>
 
 int		ft_isalpha(int c);
 
@@ -63,7 +64,7 @@ char	*ft_strdup(const char *s);
 
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 
-char	*ft_strjoin(char const *s1, char const *s2);
+char	*ft_strjoin(char *s1, char const *s2);
 
 char	*ft_strtrim(char const *s1, char const *set);
 
@@ -106,5 +107,35 @@ void	ft_lstclear(t_list **list, void (*del)(void *));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
 
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
+
+/*###########################GNL##########################################*/
+
+# if BUFFER_SIZE > 2147483647
+#  undef BUFFER_SIZE 
+# endif
+
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 10
+# endif
+
+char	*get_next_line(int fd);
+char	*ft_strchr(const char *s, int c);
+size_t	ft_strlen(const char *s);
+void	*ft_calloc(size_t nmemb, size_t size);
+
+/*###########################PRINTF##########################################*/
+
+int		ft_printf(const char *format, ...);
+void	print_num(va_list args,	int *len);
+void	print_str(va_list args,	int *len);
+void	print_unum(va_list args, int *len);
+void	print_address(va_list args,	int *len);
+void	print_hexa_num(va_list args, int *len, char c);
+void	ft_putchar(char c, int *len);
+void	ft_putnbr(int n, int *len);
+void	ft_putstr(char *s, int *len);
+void	ft_putnbr_ul(unsigned long num, char *s, int *len);
+void	ft_putnbr_u(unsigned int n, int *len);
+void	ft_putnbr_base(unsigned int n, char *s, int *len);
 
 #endif
