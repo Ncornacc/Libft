@@ -6,7 +6,7 @@
 /*   By: ncornacc <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/10/08 12:20:59 by ncornacc      #+#    #+#                 */
-/*   Updated: 2023/04/19 14:47:40 by ncornacc      ########   odam.nl         */
+/*   Updated: 2023/05/24 14:34:37 by ncornacc      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,6 @@ char	*ft_strjoin(char *s1, char const *s2)
 	ft_memmove(ptr, s1, len1);
 	ft_memmove((ptr + len1), s2, len2);
 	ptr[total_len - 1] = '\0';
+	free(s1);
 	return (ptr);
 }
